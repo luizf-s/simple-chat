@@ -1,0 +1,16 @@
+{
+  "name": "chat",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Luiz Felipe <luizfelipecsalgado@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+      "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
