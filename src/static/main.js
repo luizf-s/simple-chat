@@ -40,6 +40,11 @@ const newMessageHtmlElement = (agent, text) => {
 
 const connectToServer = () => {
     socketio.on("connect", () => { alert("Connected") })
+    onConnectionEstablished()
+}
+
+const onConnectionEstablished = () => {
+    document.querySelector("#connection-status").innerText = "Connected"
 }
 
 const onInit = () => {

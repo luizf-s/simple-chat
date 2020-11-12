@@ -1,23 +1,18 @@
 const http = require("http")
 const path = require("path")
 
-const cors = require("cors")
 const express = require("express")
 const socketio = require("socket.io")
 
 const app = express()
 const server = http.Server(app)
-const io = socketio(http)
+const io = socketio(server)
 
 const staticDir = path.join(__dirname, "src", "static")
 
 app.use(express.static(staticDir))
-// app.use(cors({
-//     credentials: true,
-//     origin: ["http://localhost:3000"]
-// }))
 
-app.get("/chat", (req, res) => {
+app.get("/", (req, res) => {
     res.sendFile("index.html", { root: "./src/pages" })
 })
 
