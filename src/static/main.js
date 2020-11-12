@@ -1,3 +1,5 @@
+const socketio = io()
+
 const AGENTS = {
     SENDER: 0,
     RECEIVER: 1
@@ -24,16 +26,25 @@ const tempRenderFirstMessages = () => {
 
 const newMessageHtmlElement = (agent, text) => {
     const agentStyle = agent == AGENTS.SENDER ? "my-message" : "remote-message"
+
     const messageHtmlElement = document.createElement("div")
     messageHtmlElement.className = `message ${agentStyle}`
+
     const innerTextHtmlElement = document.createElement("p")
     innerTextHtmlElement.innerText = text
+
     messageHtmlElement.appendChild(innerTextHtmlElement)
+
     return messageHtmlElement
+}
+
+const connectToServer = () => {
+    socketio.on("connect", () => { alert("Connected") })
 }
 
 const onInit = () => {
     tempRenderFirstMessages()
+    connectToServer()
 }
 
 onInit()

@@ -5,10 +5,12 @@
   "author": "Luiz Felipe <luizfelipecsalgado@gmail.com>",
   "license": "MIT",
   "scripts": {
-      "dev": "nodemon server.js"
+    "dev": "nodemon server.js"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "socket.io": "^3.0.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
