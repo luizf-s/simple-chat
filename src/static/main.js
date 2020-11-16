@@ -20,7 +20,8 @@ const newMessageHtmlElement = (agent, text) => {
 const connectToServer = () => {
     const socketio = io()
     socketio.on("connect", () => { onConnectionEstablished() })
-    socketio.on("message", onReceiveMessage)
+    socketio.on("new-message", onReceiveMessage)
+    return socketio
 }
 
 const onConnectionEstablished = () => {
@@ -30,19 +31,25 @@ const onConnectionEstablished = () => {
     messageInput.focus()
 }
 
-const setUpListeners = () => {
-    window.onkeydown = waitForReturn
+const setUpListeners = (socket) => {
+    window.onkeydown = (event) => waitForReturn(event, socket)
 }
 
-const waitForReturn = event => {
+const waitForReturn = (event, socket) => {
     if (event.key === "Enter") {
-        const message = document.querySelector("#new-message").value
-        sendMessage(message)
+        const messageBox = document.querySelector("#new-message").value
+        const name = document.querySelector("#name").value || "anonymous"
+        const message = `${name}: ${messageBox}`
+        sendMessage(message, socket)
     }
 }
 
-const sendMessage = message => {
-    console.log(message)
+const sendMessage = (message, socket) => {
+    socket.emit("new-message", message)
+    const newMessage = newMessageHtmlElement(AGENTS.SENDER, message)
+    const messageHistoryElement = getMessageHistoryElement()
+    messageHistoryElement.appendChild(newMessage)
+    document.querySelector("#new-message").value = ""
 }
 
 const onReceiveMessage = (message) => {
@@ -51,9 +58,9 @@ const onReceiveMessage = (message) => {
     messageHistoryElement.appendChild(newMessage)
 }
 
-const onInit = () => {
-    connectToServer()
-    setUpListeners()
+const init = () => {
+    const socket = connectToServer()
+    setUpListeners(socket)
 }
 
 // helpers
@@ -61,4 +68,4 @@ const getMessageHistoryElement = () => {
     return document.querySelector("#messages-history")
 }
 
-onInit()
+init()

@@ -36,6 +36,15 @@
     height: 24px;
 }
 
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+header div p {
+    display: inline;
+}
+
 .message {
     margin: 6px 0;
     display: flex;
