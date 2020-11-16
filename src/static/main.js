@@ -27,8 +27,9 @@ const connectToServer = () => {
 const onConnectionEstablished = () => {
     document.querySelector("#connection-status").innerText = "Connected"
     const messageInput = document.querySelector("#new-message")
+    const name = document.querySelector("#name")
     messageInput.disabled = false
-    messageInput.focus()
+    name.focus()
 }
 
 const setUpListeners = (socket) => {

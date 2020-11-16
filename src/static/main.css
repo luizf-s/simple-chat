@@ -6,10 +6,10 @@
 
 .main {
     width: 80%;
-    height: 80%;
+    height: 95%;
 
     margin: 0 auto;
-    padding: 10% 0;
+    padding: 24px 0;
 
     display: flex;
     flex-direction: column
