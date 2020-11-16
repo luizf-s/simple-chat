@@ -9,6 +9,7 @@ const server = http.Server(app)
 const io = socketio(server)
 
 const staticDir = path.join(__dirname, "src", "static")
+const PORT = process.env.PORT || 5000
 
 // TODO: pensar em maneira melhor de gerenciar os clientes
 let connectedClients = []
@@ -28,9 +29,9 @@ io.on("connection", (socket) => {
     socket.on("disconnect", _ => removeClient(socket))
 })
 
-server.listen(3000, () => {
+server.listen(PORT, () => {
     console.clear()
-    console.log("Listening on localhost:3000")
+    console.log(`Listening on localhost:${PORT}`)
 })
 
 
