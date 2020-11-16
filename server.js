@@ -38,8 +38,8 @@ server.listen(PORT, () => {
 const id = socket => socket.conn.id
 
 const removeClient = socket => {
-    const isDisconnetedClient = skt => id(skt) === id(socket)
-    connectedClients = connectedClients.filter(isDisconnetedClient)
+    const isNotDisconnectedClient = skt => id(skt) !== id(socket)
+    connectedClients = connectedClients.filter(isNotDisconnectedClient)
     console.log(`Client disconnected: ${socket.id}`)
 }
 
